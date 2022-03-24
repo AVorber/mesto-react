@@ -1,12 +1,12 @@
-import logo from './logo.svg';
-import './App.css';
+import avatar from './images/kusto.jpg';
+import logo from './images/header-logo.svg';
 
 function App() {
   return (
     <div className="page">
       <header className="header">
         <a href="#" className="header__logo-link">
-          <img src="<%=require('./images/header-logo.svg')%>" alt="Место" className="header__logo" />
+          <img src={logo} alt="Место" className="header__logo" />
         </a>
         <hr className="header__line" />
       </header>
@@ -14,7 +14,7 @@ function App() {
       <main className="content">
         <section className="profile" aria-label="Профиль пользователя">
           <div className="profile__avatar-container">
-            <img src="<%=require('./images/kusto.jpg')%>" alt="Аватар пользователя" className="profile__avatar" />
+            <img src={avatar} alt="Аватар пользователя" className="profile__avatar" />
           </div>
           <div className="profile__info">
             <h1 className="profile__title"></h1>
