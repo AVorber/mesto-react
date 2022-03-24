@@ -1,36 +1,16 @@
-import avatar from './images/kusto.jpg';
-import logo from './images/header-logo.svg';
+import React from 'react';
+import avatar from '../images/kusto.jpg';
+import logo from '../images/header-logo.svg';
+import Header from './Header';
+import Main from './Main';
+import Footer from './Footer';
 
 function App() {
   return (
     <div className="page">
-      <header className="header">
-        <a href="#" className="header__logo-link">
-          <img src={logo} alt="Место" className="header__logo" />
-        </a>
-        <hr className="header__line" />
-      </header>
-
-      <main className="content">
-        <section className="profile" aria-label="Профиль пользователя">
-          <div className="profile__avatar-container">
-            <img src={avatar} alt="Аватар пользователя" className="profile__avatar" />
-          </div>
-          <div className="profile__info">
-            <h1 className="profile__title"></h1>
-            <p className="profile__subtitle"></p>
-            <button type="button" className="profile__edit-button"></button>
-          </div>
-          <button type="button" className="profile__add-button"></button>
-        </section>
-
-        <section className="cards" aria-label="Интересные места России">
-        </section>
-      </main>
-
-      <footer className="footer">
-        <p className="footer__copyright">&#169; 2022 Mesto Russia</p>
-      </footer>
+      <Header logo={logo} />
+      <Main avatar={avatar} />
+      <Footer />
 
       <div className="popup popup_type_profile">
         <div className="popup__container">
