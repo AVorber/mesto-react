@@ -131,20 +131,6 @@ function App() {
         isOpen={isConfirmPopupOpen}
         onClose={closeAllPopup}
       />
-
-      <template className="card-template">
-        <article className="card">
-          <img src="#" alt="" className="card__image" />
-            <div className="card__info">
-              <h3 className="card__title" />
-              <div className="card__like-wrapper">
-                <button type="button" className="card__like-button" />
-                <span className="card__like-counter" />
-              </div>
-            </div>
-            <button type="button" className="card__delete-button" />
-        </article>
-      </template>
     </div>
   );
 }

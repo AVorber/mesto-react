@@ -1,12 +1,14 @@
 import React from "react";
 import api from '../utils/api';
 import avatar from '../images/kusto.jpg';
+import Card from './Card';
 
 function Main({onEditProfile, onAddPlace, onEditAvatar}) {
 
   const [userName, setUserName] = React.useState(avatar);
   const [userDescription, setUserDescription] = React.useState('');
   const [userAvatar, setUserAvatar] = React.useState('');
+  const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
     Promise.all([api.getUserInfo(), api.getInitialCards()])
@@ -14,6 +16,7 @@ function Main({onEditProfile, onAddPlace, onEditAvatar}) {
       setUserName(userData.name);
       setUserDescription(userData.about);
       setUserAvatar(userData.avatar);
+      setCards(initialCards);
     })
   }, []);
 
@@ -36,6 +39,9 @@ function Main({onEditProfile, onAddPlace, onEditAvatar}) {
       </section>
 
       <section className="cards" aria-label="Интересные места России">
+        {
+          cards.map(card => <Card key={card._id} {...card} /> )
+        }
       </section>
     </main>
   );
