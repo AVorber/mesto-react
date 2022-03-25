@@ -1,8 +1,10 @@
-function Header(props) {
+import React from "react";
+
+function Header({logo}) {
   return (
     <header className="header">
       <a href="#" className="header__logo-link">
-        <img src={props.logo} alt="Место" className="header__logo" />
+        <img src={logo} alt="Место" className="header__logo" />
       </a>
       <hr className="header__line" />
     </header>
