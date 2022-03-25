@@ -1,6 +1,4 @@
 import React from 'react';
-import avatar from '../images/kusto.jpg';
-import logo from '../images/header-logo.svg';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
@@ -9,18 +7,19 @@ import ImagePopup from './ImagePopup';
 
 function App() {
 
+  const emptyCard = {isOpened: false, name: null, link: null};
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isConfirmPopupOpen, setIsConfirmPopupOpen] = React.useState(false);
-  const [selectedCard, setSelectedCard] = React.useState({isOpened: false, name: null, link: null});
+  const [selectedCard, setSelectedCard] = React.useState(emptyCard);
 
-  function closeAllPopup() {
+  function closeAllPopups() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
     setIsConfirmPopupOpen(false);
-    setSelectedCard({isOpened: false, name: null, link: null})
+    setSelectedCard(emptyCard)
   }
 
   function handleEditProfileClick() {
@@ -41,7 +40,7 @@ function App() {
 
   return (
     <div className="page">
-      <Header logo={logo} />
+      <Header />
       <Main
         onEditProfile={handleEditProfileClick}
         onAddPlace={handleAddPlaceClick}
@@ -51,12 +50,12 @@ function App() {
       <Footer />
 
       <PopupWithForm
-        title={'Редактировать профиль'}
-        popupName={'profile'}
-        formName={'editProfile'}
-        buttonTitle={'Сохранить'}
+        title='Редактировать профиль'
+        popupName='profile'
+        formName='editProfile'
+        buttonTitle='Сохранить'
         isOpen={isEditProfilePopupOpen}
-        onClose={closeAllPopup}
+        onClose={closeAllPopups}
       >
         <input
           type="text"
@@ -83,12 +82,12 @@ function App() {
       </PopupWithForm>
 
       <PopupWithForm
-        title={'Обновить аватар'}
-        popupName={'avatar'}
-        formName={'editAvatar'}
-        buttonTitle={'Сохранить'}
+        title='Обновить аватар'
+        popupName='avatar'
+        formName='editAvatar'
+        buttonTitle='Сохранить'
         isOpen={isEditAvatarPopupOpen}
-        onClose={closeAllPopup}
+        onClose={closeAllPopups}
       >
         <input
           type="url"
@@ -102,12 +101,12 @@ function App() {
       </PopupWithForm>
 
       <PopupWithForm
-        title={'Новое место'}
-        popupName={'card'}
-        formName={'addCard'}
-        buttonTitle={'Создать'}
+        title='Новое место'
+        popupName='card'
+        formName='addCard'
+        buttonTitle='Создать'
         isOpen={isAddPlacePopupOpen}
-        onClose={closeAllPopup}
+        onClose={closeAllPopups}
       >
         <input
           type="text"
@@ -132,17 +131,17 @@ function App() {
       </PopupWithForm>
 
       <PopupWithForm
-        title={'Вы уверены?'}
-        popupName={'confirm'}
-        formName={'deleteCard'}
-        buttonTitle={'Да'}
+        title='Вы уверены?'
+        popupName='confirm'
+        formName='deleteCard'
+        buttonTitle='Да'
         isOpen={isConfirmPopupOpen}
-        onClose={closeAllPopup}
+        onClose={closeAllPopups}
       />
 
       <ImagePopup
         {...selectedCard}
-        onClose={closeAllPopup}
+        onClose={closeAllPopups}
       />
     </div>
   );

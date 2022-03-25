@@ -1,6 +1,7 @@
 import React from "react";
+import logo from '../images/header-logo.svg';
 
-function Header({logo}) {
+function Header() {
   return (
     <header className="header">
       <a href="#" className="header__logo-link">

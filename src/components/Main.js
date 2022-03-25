@@ -1,13 +1,12 @@
 import React from "react";
 import api from '../utils/api';
-import avatar from '../images/kusto.jpg';
 import Card from './Card';
 
 function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
 
-  const [userName, setUserName] = React.useState(avatar);
+  const [userName, setUserName] = React.useState('');
   const [userDescription, setUserDescription] = React.useState('');
-  const [userAvatar, setUserAvatar] = React.useState('');
+  const [userAvatar, setUserAvatar] = React.useState(null);
   const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
@@ -18,17 +17,14 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
       setUserAvatar(userData.avatar);
       setCards(initialCards);
     })
+    .catch(err => alert(err))
   }, []);
 
   return (
     <main className="content">
       <section className="profile" aria-label="Профиль пользователя">
         <div className="profile__avatar-container" onClick={onEditAvatar}>
-          <img
-            className="profile__avatar"
-            alt="Аватар пользователя"
-            src={userAvatar}
-          />
+          { userAvatar && (<img className="profile__avatar" alt="Аватар пользователя" src={userAvatar} />) }
         </div>
         <div className="profile__info">
           <h1 className="profile__title">{userName}</h1>

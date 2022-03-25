@@ -7,7 +7,7 @@ const Card = ({name, link, likes, onCardClick}) => {
 
   return (
     <article className="card">
-      <img src={link} alt="" className="card__image" onClick={handleClick} />
+      <img src={link} alt={name} className="card__image" onClick={handleClick} />
         <div className="card__info">
           <h3 className="card__title">{name}</h3>
           <div className="card__like-wrapper">

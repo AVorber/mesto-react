@@ -18,6 +18,7 @@ class Api {
         headers: this._headers,
       })
         .then(response => this._validateResponse(response))
+        .catch(err => alert(err))
   }
 
   addCard(name, link) {
@@ -31,6 +32,7 @@ class Api {
         })
       })
         .then(response => this._validateResponse(response))
+        .catch(err => alert(err))
   }
 
     deleteCard(cardId) {
@@ -40,6 +42,7 @@ class Api {
           headers: this._headers,
         })
           .then(response => this._validateResponse(response))
+          .catch(err => alert(err))
     }
 
   getUserInfo() {
@@ -49,6 +52,7 @@ class Api {
         headers: this._headers,
       })
         .then(response => this._validateResponse(response))
+        .catch(err => alert(err))
   }
 
   editUserInfo({ name, about }) {
@@ -62,6 +66,7 @@ class Api {
         })
       })
         .then(response => this._validateResponse(response))
+        .catch(err => alert(err))
   }
 
   editUserAvatar({ avatarLink }) {
@@ -74,6 +79,7 @@ class Api {
         })
       })
         .then(response => this._validateResponse(response))
+        .catch(err => alert(err))
   }
 
   addLike(cardId) {
@@ -83,6 +89,7 @@ class Api {
         headers: this._headers,
       })
         .then(response => this._validateResponse(response))
+        .catch(err => alert(err))
   }
 
   deleteLike(cardId) {
@@ -92,6 +99,7 @@ class Api {
         headers: this._headers,
       })
         .then(response => this._validateResponse(response))
+        .catch(err => alert(err))
   }
 }
 
