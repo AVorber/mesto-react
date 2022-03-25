@@ -36,7 +36,6 @@ function App() {
     <div className="page">
       <Header logo={logo} />
       <Main
-        avatar={avatar}
         onEditProfile={handleEditProfileClick}
         onAddPlace={handleAddPlaceClick}
         onEditAvatar={handleEditAvatarClick}
