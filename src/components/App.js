@@ -5,6 +5,7 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
+import ImagePopup from './ImagePopup';
 
 function App() {
 
@@ -12,12 +13,14 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isConfirmPopupOpen, setIsConfirmPopupOpen] = React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState({isOpened: false, name: null, link: null});
 
   function closeAllPopup() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
     setIsConfirmPopupOpen(false);
+    setSelectedCard({isOpened: false, name: null, link: null})
   }
 
   function handleEditProfileClick() {
@@ -32,6 +35,10 @@ function App() {
     setIsEditAvatarPopupOpen(true)
   }
 
+  const handleCardClick = card => {
+    setSelectedCard({isOpened: true, ...card})
+  };
+
   return (
     <div className="page">
       <Header logo={logo} />
@@ -39,6 +46,7 @@ function App() {
         onEditProfile={handleEditProfileClick}
         onAddPlace={handleAddPlaceClick}
         onEditAvatar={handleEditAvatarClick}
+        onCardClick={handleCardClick}
       />
       <Footer />
 
@@ -129,6 +137,11 @@ function App() {
         formName={'deleteCard'}
         buttonTitle={'Да'}
         isOpen={isConfirmPopupOpen}
+        onClose={closeAllPopup}
+      />
+
+      <ImagePopup
+        {...selectedCard}
         onClose={closeAllPopup}
       />
     </div>

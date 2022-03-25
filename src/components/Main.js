@@ -3,7 +3,7 @@ import api from '../utils/api';
 import avatar from '../images/kusto.jpg';
 import Card from './Card';
 
-function Main({onEditProfile, onAddPlace, onEditAvatar}) {
+function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
 
   const [userName, setUserName] = React.useState(avatar);
   const [userDescription, setUserDescription] = React.useState('');
@@ -39,9 +39,7 @@ function Main({onEditProfile, onAddPlace, onEditAvatar}) {
       </section>
 
       <section className="cards" aria-label="Интересные места России">
-        {
-          cards.map(card => <Card key={card._id} {...card} /> )
-        }
+        { cards.map(card => ( <Card key={card._id} {...card} onCardClick={onCardClick} /> )) }
       </section>
     </main>
   );
