@@ -5,7 +5,7 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
 
-  const {name, about, avatar} = React.useContext(CurrentUserContext);
+  const {_id, name, about, avatar} = React.useContext(CurrentUserContext);
   const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
@@ -15,6 +15,15 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
     })
     .catch(err => alert(err))
   }, []);
+
+  function handleCardLike(card) {
+    const isLiked = card.likes.some(i => i._id === _id);
+    api.changeLikeCardStatus(card._id, !isLiked)
+      .then(newCard => {
+        setCards(state => state.map((c) => c._id === card._id ? newCard : c));
+      })
+      .catch(err => alert(err))
+  }
 
   return (
     <main className="content">
@@ -31,7 +40,13 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
       </section>
 
       <section className="cards" aria-label="Интересные места России">
-        { cards.map(card => ( <Card key={card._id} {...card} onCardClick={onCardClick} /> )) }
+        { cards.map(card => (
+          <Card
+            key={card._id} {...card}
+            onCardClick={onCardClick}
+            onCardLike={handleCardLike}
+          />
+        )) }
       </section>
     </main>
   );

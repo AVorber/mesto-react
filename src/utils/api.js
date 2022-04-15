@@ -82,20 +82,10 @@ class Api {
         .catch(err => alert(err))
   }
 
-  addLike(cardId) {
+  changeLikeCardStatus(cardId, isLiked) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`,
       {
-        method: 'PUT',
-        headers: this._headers,
-      })
-        .then(response => this._validateResponse(response))
-        .catch(err => alert(err))
-  }
-
-  deleteLike(cardId) {
-    return fetch(`${this._baseUrl}/cards/${cardId}/likes`,
-      {
-        method: 'DELETE',
+        method: isLiked ? 'PUT' : 'DELETE',
         headers: this._headers,
       })
         .then(response => this._validateResponse(response))

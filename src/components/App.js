@@ -24,6 +24,12 @@ function App() {
     setIsConfirmPopupOpen(false);
     setSelectedCard(emptyCard)
   }
+  
+  React.useEffect(() => {
+    api.getUserInfo()
+      .then(data => setCurrentUser(data))
+      .catch(err => alert(err))
+  }, []);
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true)
@@ -40,12 +46,6 @@ function App() {
   const handleCardClick = card => {
     setSelectedCard({isOpened: true, ...card})
   };
-
-  React.useEffect(() => {
-    api.getUserInfo()
-      .then(data => setCurrentUser(data))
-      .catch(err => alert(err))
-  }, []);
 
   return (
     <div className="page">
