@@ -35,15 +35,15 @@ class Api {
         .catch(err => alert(err))
   }
 
-    deleteCard(cardId) {
-      return fetch(`${this._baseUrl}/cards/${cardId}`,
-        {
-          method: 'DELETE',
-          headers: this._headers,
-        })
-          .then(response => this._validateResponse(response))
-          .catch(err => alert(err))
-    }
+  deleteCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}`,
+      {
+        method: 'DELETE',
+        headers: this._headers,
+      })
+        .then(response => this._validateResponse(response))
+        .catch(err => alert(err))
+  }
 
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`,
