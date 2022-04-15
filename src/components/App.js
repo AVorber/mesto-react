@@ -4,6 +4,7 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
+import EditProfilePopup from './EditProfilePopup';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 
@@ -24,7 +25,7 @@ function App() {
     setIsConfirmPopupOpen(false);
     setSelectedCard(emptyCard)
   }
-  
+
   React.useEffect(() => {
     api.getUserInfo()
       .then(data => setCurrentUser(data))
@@ -47,6 +48,15 @@ function App() {
     setSelectedCard({isOpened: true, ...card})
   };
 
+  function handleUpdateUser({name, about}) {
+    api.editUserInfo({name, about})
+      .then(data => {
+        setCurrentUser(data);
+        closeAllPopups();
+      })
+      .catch(err => alert(err))
+  }
+
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
@@ -58,38 +68,11 @@ function App() {
           onCardClick={handleCardClick}
         />
         <Footer />
-
-        <PopupWithForm
-          title='Редактировать профиль'
-          popupName='profile'
-          formName='editProfile'
-          buttonTitle='Сохранить'
+        <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
-        >
-          <input
-            type="text"
-            name="name"
-            className="popup__field popup__name-input"
-            id="name-input"
-            placeholder="Имя"
-            minLength="2"
-            maxLength="40"
-            required
-          />
-          <span className="popup__field-error name-input-error" />
-          <input
-            type="text"
-            name="about"
-            className="popup__field popup__about-input"
-            id="about-input"
-            placeholder="О себе"
-            minLength="2"
-            maxLength="200"
-            required
-          />
-          <span className="popup__field-error about-input-error" />
-        </PopupWithForm>
+          onUpdateUser={handleUpdateUser}
+        />
 
         <PopupWithForm
           title='Обновить аватар'
