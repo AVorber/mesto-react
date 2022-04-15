@@ -4,6 +4,7 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
+import EditAvatarPopup from './EditAvatarPopup';
 import EditProfilePopup from './EditProfilePopup';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
@@ -57,6 +58,15 @@ function App() {
       .catch(err => alert(err))
   }
 
+  function handleUpdateAvatar(avatarLink) {
+    api.editUserAvatar(avatarLink)
+      .then(data => {
+        setCurrentUser(data);
+        closeAllPopups();
+      })
+      .catch(err => alert(err))
+  }
+
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
@@ -73,25 +83,11 @@ function App() {
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser}
         />
-
-        <PopupWithForm
-          title='Обновить аватар'
-          popupName='avatar'
-          formName='editAvatar'
-          buttonTitle='Сохранить'
+        <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
-        >
-          <input
-            type="url"
-            name="avatarLink"
-            className="popup__field popup__avatar-link-input"
-            id="avatar-link-input"
-            placeholder="Ссылка на аватар"
-            required
-          />
-          <span className="popup__field-error avatar-link-input-error" />
-        </PopupWithForm>
+          onUpdateAvatar={handleUpdateAvatar}
+        />
 
         <PopupWithForm
           title='Новое место'
